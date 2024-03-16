@@ -11,7 +11,7 @@ import (
 	"syscall"
 
 	"github.com/mitchellh/go-homedir"
-	"github.com/skanehira/tson/gui"
+	"github.com/whacked/tson/gui"
 	"golang.org/x/term"
 )
 

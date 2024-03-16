@@ -5,7 +5,7 @@ import (
 	"io"
 	"log"
 
-	"github.com/skanehira/tson/gui"
+	"github.com/whacked/tson/gui"
 )
 
 // Edit use tson as a library

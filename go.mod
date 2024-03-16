@@ -1,4 +1,4 @@
-module github.com/skanehira/tson
+module github.com/whacked/tson
 
 go 1.13
 
