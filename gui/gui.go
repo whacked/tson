@@ -17,7 +17,7 @@ import (
 	"github.com/creack/pty"
 	"github.com/gdamore/tcell/v2"
 	"github.com/rivo/tview"
-	"golang.org/x/crypto/ssh/terminal"
+	"golang.org/x/term"
 )
 
 var (
@@ -399,14 +399,14 @@ func (g *Gui) EditWithEditor() {
 		ch <- syscall.SIGWINCH // Initial resize.
 
 		// Set stdin in raw mode.
-		oldState, err := terminal.MakeRaw(int(os.Stdin.Fd()))
+		oldState, err := term.MakeRaw(int(os.Stdin.Fd()))
 		if err != nil {
 			log.Println(fmt.Sprintf("can't make terminal raw mode: %s", err))
 			g.Message(err.Error(), "main", func() {})
 			return
 		}
 		defer func() {
-			if err := terminal.Restore(int(os.Stdin.Fd()), oldState); err != nil {
+			if err := term.Restore(int(os.Stdin.Fd()), oldState); err != nil {
 				log.Printf("can't restore terminal: %s", err)
 			}
 		}()

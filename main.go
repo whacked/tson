@@ -12,7 +12,7 @@ import (
 
 	"github.com/mitchellh/go-homedir"
 	"github.com/skanehira/tson/gui"
-	"golang.org/x/crypto/ssh/terminal"
+	"golang.org/x/term"
 )
 
 var (
@@ -60,7 +60,7 @@ func run() int {
 			return printError(err)
 		}
 	} else {
-		if !terminal.IsTerminal(0) {
+		if !term.IsTerminal(int(os.Stdin.Fd())) {
 			var err error
 			i, err = gui.UnMarshalJSON(os.Stdin)
 			if err != nil {

@@ -12,4 +12,5 @@ require (
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/rivo/tview v0.0.0-20240307173318-e804876934a1
 	golang.org/x/crypto v0.21.0
+	golang.org/x/term v0.18.0 // indirect
 )
