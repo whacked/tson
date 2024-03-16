@@ -42,6 +42,14 @@ func New() *Gui {
 }
 
 func (g *Gui) Run(i interface{}) error {
+
+	// Start the application event loop
+	go func() {
+		if err := g.App.Run(); err != nil {
+			log.Println(err)
+		}
+	}()
+
 	g.Tree.UpdateView(g, i)
 	g.Tree.SetKeybindings(g)
 	g.Navi.UpdateView()
