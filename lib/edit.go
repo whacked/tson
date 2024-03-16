@@ -2,7 +2,7 @@ package lib
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"log"
 
 	"github.com/skanehira/tson/gui"
@@ -11,7 +11,7 @@ import (
 // Edit use tson as a library
 func Edit(b []byte) ([]byte, error) {
 	// dont output log
-	log.SetOutput(ioutil.Discard)
+	log.SetOutput(io.Discard)
 
 	var i interface{}
 	if err := json.Unmarshal(b, &i); err != nil {

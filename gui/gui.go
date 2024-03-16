@@ -6,7 +6,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"os"
 	"os/exec"
@@ -16,7 +15,7 @@ import (
 	"syscall"
 
 	"github.com/creack/pty"
-	"github.com/gdamore/tcell"
+	"github.com/gdamore/tcell/v2"
 	"github.com/rivo/tview"
 	"golang.org/x/crypto/ssh/terminal"
 )
@@ -221,7 +220,7 @@ func (g *Gui) SaveJSONToFile(file string) error {
 		return err
 	}
 
-	if err := ioutil.WriteFile(file, buf.Bytes(), 0666); err != nil {
+	if err := os.WriteFile(file, buf.Bytes(), 0666); err != nil {
 		log.Println(fmt.Sprintf("can't create file: %s", err))
 		return err
 	}
@@ -344,7 +343,7 @@ func (g *Gui) NaviPanel() {
 
 func (g *Gui) EditWithEditor() {
 	g.App.Suspend(func() {
-		f, err := ioutil.TempFile("", "tson")
+		f, err := os.CreateTemp("", "tson")
 		if err != nil {
 			log.Println(fmt.Sprintf("can't create temp file: %s", err))
 			g.Message(err.Error(), "main", func() {})
@@ -437,7 +436,7 @@ func (g *Gui) EditWithEditor() {
 }
 
 func UnMarshalJSON(in io.Reader) (interface{}, error) {
-	b, err := ioutil.ReadAll(in)
+	b, err := io.ReadAll(in)
 	if err != nil {
 		log.Println(err)
 		return nil, err
